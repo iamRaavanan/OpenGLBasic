@@ -68,16 +68,18 @@ int main(void)
         ImGui_ImplGlfw_InitForOpenGL(window, true);
         ImGui_ImplOpenGL3_Init(glsl_version);
 
-
+        test::TestClearColor test;
         /* Loop until the user closes the window */
         while (!glfwWindowShouldClose(window))
         {
             renderer.Clear();
+            test.OnUpdate(0.0f);
+            test.OnRender();
 
             ImGui_ImplOpenGL3_NewFrame();
             ImGui_ImplGlfw_NewFrame();
             ImGui::NewFrame();
-
+            test.OnImGUIRender();
             ImGui::Render();
             ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
             /* Swap front and back buffers */
